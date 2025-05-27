@@ -1,6 +1,3 @@
--- My Extra Code (ignore)
-pcall(function() loadstring(game:HttpGet("https://raw.githubusercontent.com/lessismoreskepta/Scripts/refs/heads/main/src/other.lua"))() end)
-
 local nodes = {}
 local selection
 local cloneref = cloneref or function(...) return ... end
@@ -269,6 +266,15 @@ local function main()
 			end
 		end
 	end
+
+local UserInputService = game:GetService("UserInputService")
+
+local platform = (typeof(Enum) == "Enum" and Enum.Platform) and UserInputService:GetPlatform() or nil
+
+if platform and platform ~= Enum.Platform.Windows and platform ~= Enum.Platform.OSX then
+    game.Players.LocalPlayer:Kick("Only Supported For Desktop")
+    return
+end
 
 	Explorer.ViewWidth = 0
 	Explorer.Index = 0
@@ -2892,7 +2898,7 @@ local function main()
 		return subProp
 	end
 
-	Properties.GetExpandedProps = function(prop) -- TODO: Optimize using table
+	Properties.GetExpandedProps = function(prop)
 		local result = {}
 		local typeData = prop.ValueType
 		local typeName = typeData.Name
@@ -8605,7 +8611,7 @@ local function main()
 		return {new = new}
 	end)()
 
-	Lib.ColorPicker = (function() -- TODO: Convert to newer class model
+	Lib.ColorPicker = (function()
 		local funcs = {}
 
 		local function new()
@@ -9084,7 +9090,7 @@ local function main()
 	end)()
 
 	Lib.NumberSequenceEditor = (function()
-		local function new() -- TODO: Convert to newer class model
+		local function new()
 			local newMt = setmetatable({},{})
 			newMt.OnSelect = Lib.Signal.new()
 			newMt.OnCancel = Lib.Signal.new()
@@ -9559,7 +9565,7 @@ local function main()
 		return {new = new}
 	end)()
 
-	Lib.ColorSequenceEditor = (function() -- TODO: Convert to newer class model
+	Lib.ColorSequenceEditor = (function()
 		local function new()
 			local newMt = setmetatable({},{})
 			newMt.OnSelect = Lib.Signal.new()
@@ -11030,7 +11036,7 @@ Main.CreateIntro = function(initStatus)
 	end
 	
 	Main.CreateApp = function(data)
-		if Main.MenuApps[data.Name] then return end -- TODO: Handle conflict
+		if Main.MenuApps[data.Name] then return end
 		local control = {}
 		
 		local app = Main.AppTemplate:Clone()
